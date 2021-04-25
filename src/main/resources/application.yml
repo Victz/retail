@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: retail
+#  security:
+#    filter:
+#      order: 10
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://localhost:3306/RETAIL?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
+#    username: root
+#    password: database20!7
+    url: jdbc:h2:mem:retaildb
+    driverClassName: org.h2.Driver
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    username: sa
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+  h2:
+    console:
+      enabled: false
+  jpa:
+    #    show-sql: true
+    open-in-view: false
+    properties:
+      #hibernate.jdbc.time_zone: UTC
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.jdbc.batch_size: 50
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+#    whitelabel:
+#      enabled: false
+application:
+  security:
+    authentication:
+      jwt:
+        issuer: example.com
+        # Base64 and at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        # Save to Spring Cloud Config server in produciton
+        base64-secret: YmYxODIwNmM4YTIyMGMxMDI0Y2RjOTIzMmE1MjBjNTkwZGViOWRjMGE5N2EzMzQyOTRhNjRkNTZjZjM0ZjA2NGY0MmMwYzZlZGNmMzI1OTJiMzg1ZDY5YTc5ZTk4ZjQwNGU2YzBkYjE5YTEzMDNlMGE1NzhmNTNiNmY5MmIxOGE=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
+
