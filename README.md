@@ -1,5 +1,8 @@
 # Retail Web
 
+### Online Demo
+http://retail.victz.com
+
 ## Development
 
 ### Debug and Run both backend and frontend

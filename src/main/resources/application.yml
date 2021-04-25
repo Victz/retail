@@ -49,6 +49,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 server:
+  port : 38080
   error:
     include-message: always
     include-binding-errors: always

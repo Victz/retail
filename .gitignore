@@ -159,3 +159,4 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 nbactions.xml
+nb-configuration.xml
