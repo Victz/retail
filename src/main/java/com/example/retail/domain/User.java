@@ -2,7 +2,8 @@ package com.example.retail.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang3.StringUtils;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -11,14 +12,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * A user.
@@ -46,8 +39,8 @@ public class User extends AbstractAuditingEntity {
     @JsonIgnore
     @ManyToMany
     @JoinTable(name = "JOIN_USER_ROLE", joinColumns = {
-        @JoinColumn(name = "USER_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "ROLE_ID")})
+            @JoinColumn(name = "USER_ID")}, inverseJoinColumns = {
+            @JoinColumn(name = "ROLE_ID")})
     private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
@@ -68,7 +61,7 @@ public class User extends AbstractAuditingEntity {
 
     // Lowercase the login before saving it in database
     public void setUsername(String login) {
-        this.username = StringUtils.lowerCase(login, Locale.ENGLISH);
+        this.username = login.toLowerCase(Locale.ENGLISH);
     }
 
     public String getPassword() {
